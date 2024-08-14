@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "cypress": "^13.13.3",
+    "typescript": "^5.5.4"
+  },
+  "name": "prestashop",
+  "version": "1.0.0",
+  "description": "This project is an automation of the e-commerce [presta-shop](https://demo.prestashop.com/#/en/front), i use BDD with [cucumber](https://cucumber.io), the flows are automated only for learning.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
