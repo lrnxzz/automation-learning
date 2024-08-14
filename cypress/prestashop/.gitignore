@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# Cypress-related
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+cypress/fixtures/example.json
+
+# TypeScript compiled files
+*.js
+*.js.map
+*.d.ts
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Cypress cache
+.cypress_cache/
+
+# Ignore the compiled output (optional, since we set noEmit: true in tsconfig.json)
+dist/
+build/
