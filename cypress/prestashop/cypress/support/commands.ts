@@ -81,7 +81,7 @@ async function extractProductInfo(
 Cypress.Commands.add('getProducts', (containerSelector: Selector, customSelectors?: Partial<ProductSelectors>): Cypress.Chainable<SimpleProduct[]> => {
     const selectors = { ...defaultSelectors, ...customSelectors };
     return containerSelector.find(selectors.product).then($products =>
-        Promise.all($products.toArray().map((element, index) => {
+        Promise.all($products.toArray().map((_, index) => {
             const elementSelector = Selector.from(`${containerSelector.rawSelector} ${selectors.product.rawSelector}:eq(${index})`);
             return extractProductInfo(elementSelector, selectors);
         }))
