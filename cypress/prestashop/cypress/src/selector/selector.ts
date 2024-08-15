@@ -1,9 +1,9 @@
-export interface Selector {
+export interface SimpleSelector {
   rawSelector: string;
 
   retrieve<E extends Node = HTMLElement>(): Cypress.Chainable<JQuery<E>>;
   retrieveWithTimeout<E extends Node = HTMLElement>(timeout: number): Cypress.Chainable<JQuery<E>>;
-  find<E extends Node = HTMLElement>(selector: Selector): Cypress.Chainable<JQuery<E>>;
+  find<E extends Node = HTMLElement>(selector: SimpleSelector): Cypress.Chainable<JQuery<E>>;
 
   assertIsClickable(): void;
   assertIsWritable(): void;
@@ -11,7 +11,7 @@ export interface Selector {
   assertContainsText(text: string): void;
 }
 
-export default class RetriavableSelector implements Selector {
+export default class Selector implements SimpleSelector {
   readonly rawSelector: string;
 
   constructor(selector: string) {
@@ -19,14 +19,14 @@ export default class RetriavableSelector implements Selector {
   }
 
   static from(selector: string): Selector {
-    return new RetriavableSelector(selector);
+    return new Selector(selector);
   }
 
   with(selector: string): Selector {
-    return new RetriavableSelector(`${this.rawSelector} ${selector}`);
+    return new Selector(`${this.rawSelector} ${selector}`);
   }
 
-  find<E extends Node = HTMLElement>(selector: RetriavableSelector): Cypress.Chainable<JQuery<E>> {
+  find<E extends Node = HTMLElement>(selector: SimpleSelector): Cypress.Chainable<JQuery<E>> {
       return this.retrieve().find(selector.rawSelector)
   }
 
