@@ -9,14 +9,14 @@ export default class LoadingElement {
     this.LOADING_SELECTOR = loadingSelector;
   }
 
-  getDynamicallyGeneratedUrlAndVisit(): void {
+  visitDynamicUrl(): void {
     cy.log(`retrieving the unique session urland visiting it.`);
 
     this.DYNAMICALLY_URL_SELECTOR.retrieve()
       .its("0.src")
       .then((dynamicUrl) => {
         if (dynamicUrl) {
-          cy.wrap(dynamicUrl).as("dynamicUrl")
+          cy.visit(dynamicUrl)
         } else {
           throw new Error("dynamic url not generated?")
         }
@@ -30,7 +30,7 @@ export default class LoadingElement {
       .should("not.be.visible")
       .then(() => {
         cy.log("loading element finished.");
-        this.getDynamicallyGeneratedUrlAndVisit();
+        this.visitDynamicUrl();
       });
   }
 }
