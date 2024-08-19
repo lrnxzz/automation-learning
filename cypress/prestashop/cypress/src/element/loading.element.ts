@@ -10,7 +10,7 @@ export default class LoadingElement {
   }
 
   visitDynamicUrl(): void {
-    cy.log(`retrieving the unique session urland visiting it.`);
+    cy.log(`Retrieving the unique session URL and visiting it.`);
 
     this.DYNAMICALLY_URL_SELECTOR.retrieve()
       .its("0.src")
@@ -18,19 +18,28 @@ export default class LoadingElement {
         if (dynamicUrl) {
           cy.visit(dynamicUrl)
         } else {
-          throw new Error("dynamic url not generated?")
+          throw new Error("Dynamic URL not generated")
         }
       });
   }
 
-  public assertElementIsLoaded(timeout: number): void {
-    cy.log(`found a loading element, waiting ${timeout}s to load finish.`);
+  public assertLoading(): void {
+    cy.log(`Asserting that the loading element is visible.`);
+    this.LOADING_SELECTOR.retrieve().should("be.visible");
+  }
 
+  public assertFinished(timeout: number): void {
+    cy.log(`Asserting that the loading element is not visible within ${timeout}ms.`);
     this.LOADING_SELECTOR.retrieveWithTimeout(timeout)
       .should("not.be.visible")
       .then(() => {
-        cy.log("loading element finished.");
+        cy.log("Loading element finished.");
         this.visitDynamicUrl();
       });
+  }
+
+  public assertElementIsLoaded(timeout: number): void {
+    this.assertLoading();
+    this.assertFinished(timeout);
   }
 }
